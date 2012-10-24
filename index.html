@@ -1,0 +1,66 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+  <title>Arbitrary Countdown</title>
+  <link rel="icon"
+    type="image/ico"
+    href="images/cog.ico" />
+  <script type="text/javascript">
+    function ScheduleScript() 
+    {
+      Main();
+      var interval = setInterval(Main, 1000);
+    }
+
+    function GetSecondsTillEvent()
+    {
+      var artificialDate = new Date(2012, 9, 25);
+      var secondsTillEvent = Math.floor((artificialDate - new Date().getTime()) / 1000);
+      return secondsTillEvent; 
+    }
+
+    function Main()
+    {
+      var formatted;
+      var secondsTillEvent = GetSecondsTillEvent();
+      if (secondsTillEvent > 0){
+        formatted = DisplayCountdown(secondsTillEvent);
+      }
+      else {
+        formatted = DisplayFinished();
+      }
+
+      document.getElementById("Time").innerHTML = formatted;
+    }
+
+    function DisplayFinished()
+    {
+      return "CONGRATS";
+    }
+
+    function DisplayCountdown(secondsTillEvent)
+    {
+      var seconds = secondsTillEvent % 60;
+      var minutes = Math.floor(secondsTillEvent/60 % 60);
+      var hours = Math.floor(secondsTillEvent/(60*60) % 24);
+      var days = Math.floor(secondsTillEvent/(60*60*24));
+
+      var formattedDay = "";
+      if (days > 0) {
+        if (days > 1) {
+          formattedDay = days + " Days, ";
+        }
+        else {
+          formattedDay = days + " Day, ";
+        }
+      }
+      return formattedDay + hours + ":" + minutes + ":" + seconds;
+    }
+
+  </script>
+</head>
+<body onload="ScheduleScript()">
+  <div id="main">
+    <img id="logo" src="/images/Header.png" width=350px height=200px />
+    <p id ="Time" /p>
+  </div>
+</body>
