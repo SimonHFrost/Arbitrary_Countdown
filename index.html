@@ -19,7 +19,8 @@
         var cookie = readCookie("randomDate");
         if(!cookie){
           var start = new Date();
-          var end = new Date(2013, 0, 1);
+          var end = new Date();
+          end.setMonth(end.getMonth() + 3);
           artificialDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
           createCookie("randomDate", artificialDate, 100);
         } else {
