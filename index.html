@@ -5,7 +5,7 @@
     type="image/ico"
     href="images/cog.ico" />
   <script type="text/javascript">
-    function ScheduleScript() 
+    function ScheduleScript()
     {
       Main();
       var interval = setInterval(Main, 1000);
@@ -29,26 +29,21 @@
       }
 
       var secondsTillEvent = Math.floor((artificialDate - new Date().getTime()) / 1000);
-      return secondsTillEvent; 
+      return secondsTillEvent;
     }
 
     function Main()
     {
       var formatted;
       var secondsTillEvent = GetSecondsTillEvent();
+      var timeElem = document.getElementById("Time");
       if (secondsTillEvent > 0){
         formatted = DisplayCountdown(secondsTillEvent);
+        timeElem.innerHTML = formatted;
+      } else {
+        timeElem.innerHTML = "";
+        document.getElementById("logo").src = "/images/applause.gif";
       }
-      else {
-        formatted = DisplayFinished();
-      }
-
-      document.getElementById("Time").innerHTML = formatted;
-    }
-
-    function DisplayFinished()
-    {
-      return "CONGRATS";
     }
 
     function DisplayCountdown(secondsTillEvent)
